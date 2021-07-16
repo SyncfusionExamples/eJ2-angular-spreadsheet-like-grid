@@ -1,0 +1,100 @@
+
+  .e-spreadsheet .e-sheet-content .e-cell .e-autocomplete .e-ddl,
+  .e-spreadsheet
+    .e-sheet-content
+    .e-cell
+    .e-autocomplete
+    .e-ddl.e-input-group:not(.e-disabled):active,
+  .e-spreadsheet
+    .e-sheet-content
+    .e-cell
+    .e-autocomplete
+    .e-ddl.e-input-group:not(.e-disabled):hover,
+  .e-spreadsheet
+    .e-sheet-content
+    .e-cell
+    .e-autocomplete
+    .e-ddl.e-input-group.e-input-focus {
+    border-color: transparent;
+  }
+  .e-spreadsheet .e-sheet-content .e-cell .e-autocomplete {
+    display: inline-block;
+  }
+  .e-spreadsheet .e-sheet-content .e-cell .e-autocomplete .e-ddl {
+    background-color: inherit;
+  }
+  .e-spreadsheet .e-sheet-content .e-cell .e-autocomplete .e-ddl .e-input {
+    font-family: 'Calibri';
+    font-size: 11pt;
+  }
+  .e-spreadsheet .e-sheet-content .e-cell .e-validation-list .e-ddl {
+    margin-top: -7px;
+  }
+  .e-spreadsheet .e-sheet-content .e-cell .e-validation-list .e-ddl .e-ddl-icon {
+    margin-left: -15px;
+  }
+  .e-dropdown-popup.bulk-action-menu ul .e-item:last-child {
+    color: red;
+  }
+  .e-dropdown-btn.bulk-action-menu {
+    background-color: transparent;
+  }
+  .e-dropdown-btn.bulk-action-menu .e-caret {
+    transition: transform 300ms ease;
+  }
+  .e-dropdown-btn.bulk-action-menu.e-active .e-caret {
+    transform: rotate(180deg);
+  }
+  .e-spreadsheet .e-cell .e-drop-icon {
+    cursor: pointer;
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    line-height: 32px;
+    text-align: center;
+    color: #5f6368;
+    transform: rotate(180deg);
+    display: inline-block;
+    transition: transform 300ms ease;
+  }
+  .e-spreadsheet .e-cell.e-collapsed .e-drop-icon {
+    transform: rotate(0deg);
+  }
+  .e-spreadsheet .e-drop-icon::before {
+    content: '\e36a';
+    font-size: 14px;
+  }
+  .e-spreadsheet .e-selection.e-hide + .e-active-cell::after,
+  .e-spreadsheet .e-selection::after {
+    content: '';
+    height: 7px;
+    width: 7px;
+    position: absolute;
+    right: -3.5px;
+    bottom: -3.5px;
+    cursor: crosshair;
+    background-color: #0078d6;
+    pointer-events: auto;
+    border: 0.5px solid #fff;
+    box-sizing: border-box;
+  }
+  .e-spreadsheet .e-sheet.e-autofill-start .e-selection {
+    background-color: transparent;
+    border-width: 2px;
+  }
+  .e-cell .e-btn.e-btn-menu {
+    background-color: transparent;
+    border-color: transparent;
+    color: #a6a6a6;
+    font-family: 'e-icons';
+  }
+  .e-cell .e-btn.e-btn-menu:focus {
+    outline: none;
+  }
+  .e-cell .e-btn.e-btn-menu::before {
+    content: '\ebef';
+  }
+  ejs-spreadsheet,
+  ejs-tab {
+    display: block;
+  }
