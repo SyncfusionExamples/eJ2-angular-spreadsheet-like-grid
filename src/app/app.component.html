@@ -1,0 +1,90 @@
+<div>
+  <ejs-tab id="tab_default" heightAdjustMode='Auto' (selected)="tabSelected($event)">
+    <e-tabitems>
+      <e-tabitem *ngFor="let tabHeader of tabHeaders;" [header]='tabHeader'></e-tabitem>
+    </e-tabitems>
+  </ejs-tab>
+</div>
+<div class="control-section" style="height: 550px;">
+  <ejs-spreadsheet #default id="spreadsheet" [openUrl]="openUrl" [saveUrl]="saveUrl" (created)="created()"
+    [showRibbon]="false" [showFormulaBar]="false" [showSheetTabs]="false" (beforeCellRender)="onCellRender($event)"
+    (queryCellInfo)="queryCellInfo($event)" (cellSave)="onCellSave($event)" (beforeSelect)="onBeforeSelect($event)"
+    (sortComplete)="onSortComplete()" (beforeDataBound)="beforeLoad()"
+    (contextMenuBeforeOpen)="onContextMenuBeforeOpen($event)" (contextMenuItemSelect)="onContextMenuItemSelect($event)">
+    <e-sheets>
+      <e-sheet name="US Entities" [showHeaders]="false" selectedRange="B2">
+        <e-ranges>
+          <e-range [dataSource]="usEntityData" startCell="B1"></e-range>
+          <e-range address="B2:B120">
+            <ng-template #template let-cell>
+              <ejs-autocomplete [dataSource]='entityNameData' placeholder='Add Entity Name' value="{{cell.value}}"
+                [fields]='fields' (change)="onAutoCompleteChange($event)"></ejs-autocomplete>
+            </ng-template>
+          </e-range>
+          <e-range address="G2:G120">
+            <ng-template #template>
+              <button class="e-btn e-flat e-icons e-btn-menu" (click)="onBtnClick($event)"></button>
+            </ng-template>
+          </e-range>
+        </e-ranges>
+        <e-rows>
+          <e-row *ngFor="let index of counter(100);" [height]="34"></e-row>
+        </e-rows>
+        <e-columns>
+          <e-column [width]=30></e-column>
+          <e-column [width]=200></e-column>
+          <e-column [width]=160></e-column>
+          <e-column [width]=130></e-column>
+          <e-column [width]=100></e-column>
+          <e-column [width]=180></e-column>
+        </e-columns>
+      </e-sheet>
+      <e-sheet name="Non-US Entities" [showHeaders]="false">
+        <e-ranges>
+          <e-range [dataSource]="nonUSEntityData"></e-range>
+        </e-ranges>
+        <e-columns>
+          <e-column [width]=160></e-column>
+          <e-column [width]=100></e-column>
+          <e-column [width]=180></e-column>
+          <e-column [width]=120></e-column>
+          <e-column [width]=120></e-column>
+        </e-columns>
+      </e-sheet>
+      <e-sheet name="Bussiness Licenses" [showHeaders]="false">
+        <e-ranges>
+          <e-range [dataSource]="businessLicensesData"></e-range>
+        </e-ranges>
+        <e-columns>
+          <e-column [width]=200></e-column>
+          <e-column [width]=100></e-column>
+          <e-column [width]=100></e-column>
+          <e-column [width]=100></e-column>
+          <e-column [width]=180></e-column>
+        </e-columns>
+      </e-sheet>
+    </e-sheets>
+  </ejs-spreadsheet>
+</div>
+<div style="text-align: right;">
+  <button ejs-dropdownbutton #bulkActionMenu [items]='bulkActionMenuItems' content='Bulk actions'
+    cssClass="bulk-action-menu" (select)="bulkActionSelect($event)"></button>
+</div>
+<ejs-dialog #bulkEditDialog [visible]="false" target='#spreadsheet' width='500px' [buttons]='buttons'>
+  <ng-template #header>
+    <div style="font-weight: bold;">Bulk Edit</div>
+  </ng-template>
+  <ng-template #content>
+    <div class="dialogContent">
+      <div>
+        <div style="font-weight: bold; margin-bottom: 5px;">Column (value)</div>
+        <ejs-dropdownlist [dataSource]='columnData' (change)='onBultEditColumnChange($event)' [value]='columnValue'
+          [fields]='columnFields'></ejs-dropdownlist>
+      </div>
+      <div style="margin-top: 10px;">
+        <div style="font-weight: bold; margin-bottom: 5px;">Edit data</div>
+        <ejs-textbox cssClass="e-outline"></ejs-textbox>
+      </div>
+    </div>
+  </ng-template>
+</ejs-dialog>
