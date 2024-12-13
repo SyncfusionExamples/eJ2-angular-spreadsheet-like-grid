@@ -1,6 +1,5 @@
-// @ts-nocheck
 import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
-import { getUSEntityData, getNonUSEntityData, getBusinessLicensesData } from './data';
+import { getUSEntityData, getNonUSEntityData, getBusinessLicensesData } from './../assets/data';
 import { Spreadsheet, SheetModel, CellRenderEventArgs, getRangeIndexes, getCellAddress, CellSaveEventArgs } from '@syncfusion/ej2-spreadsheet';
 import { CellModel, BeforeSelectEventArgs, getRow, getRangeAddress, getColumnsWidth, getSwapRange, getCell } from '@syncfusion/ej2-spreadsheet';
 import { RowModel, isNumber, getColumn, MenuSelectEventArgs } from '@syncfusion/ej2-spreadsheet';
@@ -49,7 +48,7 @@ export class AppComponent {
   public columnData: Object[] = [];
   public columnValue: string = '';
   public columnFields: Object = { value: 'Name' };
-  public buttons: { [key: string]: ButtonModel }[] = [
+  public buttons: { click: Function, buttonModel: ButtonModel }[] = [
     { click: this.bulkEditSave.bind(this), buttonModel: { content: 'Sure', isPrimary: true } },
     { click: this.bulkEditDlgClose.bind(this), buttonModel: { content: 'Cancel' } }
   ];
@@ -74,7 +73,7 @@ export class AppComponent {
   }
 
   onAutoCompleteChange(args: ChangeEventArgs): void {
-    this.spreadsheetObj.updateCell({ value: args.value }, this.spreadsheetObj.getActiveSheet().activeCell);
+    this.spreadsheetObj.updateCell({ value: <string>args.value }, this.spreadsheetObj.getActiveSheet().activeCell);
   }
 
   autofillMouseDown(e: MouseEvent): void {
@@ -132,7 +131,7 @@ export class AppComponent {
       requestAnimationFrame(() => {
         const parentCells: HTMLElement[] = [].slice.call(selectAll( '.e-cell .e-drop-icon', this.spreadsheetObj.element ));
         if (parentCells.length) {
-          let cell: HTMLElement = closest(parentCells[parentCells.length - 1], '.e-cell');
+          const cell: HTMLElement = closest(parentCells[parentCells.length - 1], '.e-cell') as HTMLElement;
           if (cell) {
             let rowIdx: number = Number(cell.parentElement.getAttribute('aria-rowindex')) - 1;
             this.spreadsheetObj.updateCell({}, getCellAddress(rowIdx, 1));
@@ -179,12 +178,12 @@ export class AppComponent {
     const sheet: SheetModel = this.spreadsheetObj.getActiveSheet();
     if (sheet.name === 'US Entities' && args.rowIndex < sheet.rows.length) {
       if (args.colIndex === 0) {
-        const checkbox: HTMLElement = createCheckBox(this.spreadsheetObj.createElement, false, { checked:
+        const checkbox: HTMLElement = <HTMLElement>createCheckBox(this.spreadsheetObj.createElement, false, { checked:
           this.isCreated && sheet.selectedRange.includes(args.address + ':' + getCellAddress(args.rowIndex, sheet.colCount - 1)) });
         args.element.appendChild(checkbox);
       } else if (args.rowIndex > 0) {
         if (args.colIndex === 1 && args.cell && args.cell.value && args.cell.colSpan > 1) {
-          args.element.firstElementChild.style.width = getColumnsWidth(sheet, args.colIndex, args.colIndex + 1) + 'px';
+          (args.element.firstElementChild as HTMLElement).style.width = getColumnsWidth(sheet, args.colIndex, args.colIndex + 1) + 'px';
           const arrowSpan: HTMLElement = this.spreadsheetObj.createElement('span', { className: 'e-drop-icon e-icons' });
           if (!getRow(sheet, args.rowIndex).cells[0].style.borderLeft) {
             args.element.classList.add('e-collapsed');
@@ -372,7 +371,7 @@ export class AppComponent {
         rangeIndexes[0], this.spreadsheetObj.getActiveSheet().colCount - 1);
       detach(cellCheckbox.parentElement);
       if (checked) {
-        cellCheckbox = createCheckBox(this.spreadsheetObj.createElement, false);
+        cellCheckbox = createCheckBox(this.spreadsheetObj.createElement, false) as HTMLInputElement;
         if (newRange.includes(curSelectRange)) {
           if (newRange.includes(curSelectRange + ' ')) {
             curSelectRange = curSelectRange + ' ';
@@ -389,7 +388,7 @@ export class AppComponent {
           args.cancel = false; return;
         }
       } else {
-        cellCheckbox = createCheckBox(this.spreadsheetObj.createElement, false, { checked: true });
+        cellCheckbox = createCheckBox(this.spreadsheetObj.createElement, false, { checked: true }) as HTMLInputElement;
         newRange = newRange ? newRange + ' ' + curSelectRange : curSelectRange;
       }
       cell.appendChild(cellCheckbox);
@@ -472,7 +471,7 @@ export class AppComponent {
   }
   bulkEditSave() {
     const index: number =
-      this.columnData.findIndex((data: { Name: string }) => data.Name === this.columnValue) + 1;
+      this.columnData.findIndex((data: { Name?: string }) => data.Name === this.columnValue) + 1;
     if (index > 0) {
       const selectedRanges: string[] = this.spreadsheetObj.getActiveSheet().selectedRange.split(' ');
       const editedValue: string = select('.e-dlg-content .e-textbox .e-input', this.bulkEditDlgObj.element).value;
@@ -623,7 +622,7 @@ export class AppComponent {
   }
 
   round(val: number, digits: number) {
-    return Number(Math.round(val + 'e' + digits) + 'e-' + digits);
+    return Number(Math.round(`${val}e${digits}` as unknown as number) + 'e-' + digits);
   }
 
   getDataPattern(data: string[]): { type?: string; value?: string[] }[] {

@@ -3,13 +3,9 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "syncfusion-angular-app": {
+    "ej2-angular-spreadsheet-like-grid": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:application": {
-          "strict": true
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -17,10 +13,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/syncfusion-angular-app",
+            "outputPath": "dist/ej2-angular-spreadsheet-like-grid",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
@@ -68,10 +66,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "syncfusion-angular-app:build:production"
+              "browserTarget": "ej2-angular-spreadsheet-like-grid:build:production"
             },
             "development": {
-              "browserTarget": "syncfusion-angular-app:build:development"
+              "browserTarget": "ej2-angular-spreadsheet-like-grid:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,16 +77,17 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "syncfusion-angular-app:build"
+            "browserTarget": "ej2-angular-spreadsheet-like-grid:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -101,6 +100,5 @@
         }
       }
     }
-  },
-  "defaultProject": "syncfusion-angular-app"
+  }
 }
