@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "eJ2-angular-spreadsheet-like-grid": {
+    "ej2-angular-spreadsheet-like-grid": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/e-j2-angular-spreadsheet-like-grid",
+            "outputPath": "dist/ej2-angular-spreadsheet-like-grid",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -66,10 +66,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "eJ2-angular-spreadsheet-like-grid:build:production"
+              "browserTarget": "ej2-angular-spreadsheet-like-grid:build:production"
             },
             "development": {
-              "browserTarget": "eJ2-angular-spreadsheet-like-grid:build:development"
+              "browserTarget": "ej2-angular-spreadsheet-like-grid:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -77,7 +77,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "eJ2-angular-spreadsheet-like-grid:build"
+            "browserTarget": "ej2-angular-spreadsheet-like-grid:build"
           }
         },
         "test": {

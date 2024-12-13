@@ -12,16 +12,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'eJ2-angular-spreadsheet-like-grid'`, () => {
+  it(`should have as title 'ej2-angular-spreadsheet-like-grid'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('eJ2-angular-spreadsheet-like-grid');
+    expect(app.title).toEqual('ej2-angular-spreadsheet-like-grid');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('eJ2-angular-spreadsheet-like-grid app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('ej2-angular-spreadsheet-like-grid app is running!');
   });
 });

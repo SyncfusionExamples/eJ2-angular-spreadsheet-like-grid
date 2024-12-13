@@ -1,4 +1,4 @@
-# EJ2AngularSpreadsheetLikeGrid
+# ej2-angular-spreadsheet-like-grid
 
 This example shows the customization of EJ2 Spreadsheet component like Grid UI with sorting, filtering, grouping, autofill, data validation etc. You can check the [Custom Spreadsheet demo](https://ej2.syncfusion.com/angular/staging/spreadsheet/) from this link.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.1.
